@@ -2,20 +2,29 @@
  * Created by user on 08.01.2016.
  */
 import javax.swing.*;
-import javax.swing.ImageIcon;
-import java.awt.Image;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+public class Road extends JPanel implements ActionListener{
 
-
-public class Road extends JPanel {
-
+	Timer mainTimer = new Timer (20,this);
 	Image img = new ImageIcon ("D:\\Java_works\\Project\\GameRACE\\src\\main\\resources\\road.jpg").getImage();
+	Player player =new Player ();
 
-	public void paint(Graphics g){
-		g = (Graphics2D)g;
-		g.drawImage (img,0,0,null);
+	Road(){
+		mainTimer.start ();
 
 	}
 
+	public void paint(Graphics g){
+		g = (Graphics2D)g;
+		g.drawImage (img,player.layerOne,0,null);
+		g.drawImage (player.img,player.xPos,player.yPos,null);
+
+	}
+
+	public void actionPerformed (ActionEvent e) {
+		player.move ();
+		repaint ();
+	}
 }
